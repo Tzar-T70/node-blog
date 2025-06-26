@@ -1,0 +1,41 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+  <%- include("./partials/nav.ejs") %>
+
+  <!-- displays specific blog entry info -->
+  <div class="details content">
+    <h2><%= blog.title %></h2>
+    <div class="content">
+      <p><%= blog.body %></p>
+    </div>
+    <!--button for deleting blog entry -->
+    <a class="delete" data-doc="<%= blog._id %>">delete</a>
+  </div>
+
+  <%- include("./partials/footer.ejs") %>
+
+  <script>
+    //access the delete element
+    const trashcan = document.querySelector('a.delete');
+
+    //detect when a user clicks on button
+    trashcan.addEventListener('click', (e) => {
+      //store request in a variable
+      const endpoint = `/blogs/${trashcan.dataset.doc}`;
+
+      //see netninjas js course to understand ts
+      fetch(endpoint, {
+        method: 'DELETE',
+      })
+      //take json response from server n make it a js object
+      .then(response => response.json())
+      //redirect user to blogs page
+      .then(data => window.location.href = data.redirect)
+      .catch(err => console.log(err));
+    });
+    
+  </script>
+</body>
+</html>
