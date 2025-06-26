@@ -1,8 +1,8 @@
 <html lang="en">
-<%- include("./partials/head.ejs") %>
+<%- include("../partials/head.ejs") %>
 
 <body>
-  <%- include("./partials/nav.ejs") %>
+  <%- include("../partials/nav.ejs") %>
 
   <!-- displays specific blog entry info -->
   <div class="details content">
@@ -11,10 +11,12 @@
       <p><%= blog.body %></p>
     </div>
     <!--button for deleting blog entry -->
-    <a class="delete" data-doc="<%= blog._id %>">delete</a>
+    <a class="delete" data-doc="<%= blog._id %>">
+      <img src="/images/trashcan.svg" alt="delete icon">
+    </a>
   </div>
 
-  <%- include("./partials/footer.ejs") %>
+  <%- include("../partials/footer.ejs") %>
 
   <script>
     //access the delete element
