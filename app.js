@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const blogRoutes = require('./routes/blogRoutes');
+const Blog = require('./models/blog'); //import model
 
 // initialize express app
 const app = express();
@@ -23,8 +24,24 @@ app.use(morgan('dev')); //sends browser request info in terminal
 
 
 //routes
-app.get('/', (req, res) => {
-  res.redirect('/blogs'); //make this a separate homepage
+app.get('/', async (req, res) => {
+  try {
+    const recentPost = await Blog.findOne().sort({ createdAt: -1 });
+    res.render('homepage', { 
+      title: 'Homepage',
+      recentPost
+    });
+  } catch(err) {
+    console.error(err);
+    res.render('homepage', { 
+      title: 'Homepage',
+      recentPost: null
+    });
+  }
+
+
+
+  
 });
 app.get('/about', (req, res) => {
   res.render('about', { title: 'About' });

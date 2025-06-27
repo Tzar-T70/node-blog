@@ -7,15 +7,19 @@ const Schema = mongoose.Schema;
 const blogSchema = new Schema({
     title: {
         type: String,
-        required: true
+        required:[true, 'Title is required.'],
+        trim: true,
+        maxlength: [100, 'Title cannot exceed 100 characters']
     },
     snippet: {
         type: String,
-        required: true
+        required: [true, 'Blog snippet is required'],
+        trim: true,
+        maxlength: [200, 'Snippet cannot exceed 200 characters']
     },
     body: {
         type: String,
-        required: true
+        required: [true, 'Blog body is required']
     }
 }, {timestamps: true}); //auto makes 'created at' property etc
 

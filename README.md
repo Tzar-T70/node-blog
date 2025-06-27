@@ -9,7 +9,6 @@ A simple blog site made using node.js using a tutorial from Net Ninja
 ### function
 - add author property to blog model
 - show date blog was created on site
-- make a simple homepage (change routes)
 
 ### form
 - change css (learn css proper, find good pics, get inspo)

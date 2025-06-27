@@ -4,7 +4,31 @@
 <body>
   <%- include("./partials/nav.ejs") %>
 
-  
+  <h2>Recent Blog</h2>
+
+  <!-- recent Post -->
+  <% if (recentPost) { %>
+    <article class="post recent">
+      <header class="major">
+        <span class="date"><%= recentPost.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></span>
+        <h2><a href="/blogs/<%= recentPost._id %>"><%= recentPost.title %></a></h2>
+        <p><%= recentPost.snippet %></p>
+      </header>
+
+      <!-- only displays if an image exists -->
+      <% if (recentPost.imageUrl) { %> 
+        <a href="/blogs/<%= recentPost._id %>" class="image main">
+          <img src="<%= recentPost.imageUrl %>" alt="<%= recentPost.title %>" />
+        </a>
+      <% } %>
+
+      <ul class="actions special">
+        <li><a href="/blogs/<%= recentPost._id %>" class="button large">Full Story</a></li>
+      </ul>
+    </article>
+  <% } else { %>
+    <p>No blog posts yet. Check back soon!</p>
+  <% } %>
 
   <%- include("./partials/footer.ejs") %>
 </body>
